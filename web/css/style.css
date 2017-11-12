@@ -1,0 +1,63 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 5-nov-2017, 22:37:28
+    Author     : nickd_000
+*/
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;cursor: pointer}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+#form div {
+    width:400px;
+}
+
+#form div label{
+    width:150px;
+    float:left;
+}
+#form div input{
+    width:150px;
+    float:left;
+}
+#form div textarea {
+    width:100%;
+    float:left;
+    border-radius: 8px;
+    width: 100%;
+    height: 120px;
+    border: 3px solid #cccccc;
+    padding: 5px;
+    font-family: Tahoma, sans-serif;
+}
+
+.measure {
+    width:100%;
+    float: left;
+}
+
+#chartdiv {
+    float:left;
+}
