@@ -16,6 +16,7 @@ and open the template in the editor.
 #customers td, #customers th {
     border: 1px solid #ddd;
     padding: 8px;
+  text-decoration: none;
 }
 
 #customers tr:nth-child(even){background-color: #f2f2f2;}
@@ -28,6 +29,7 @@ and open the template in the editor.
     text-align: left;
     background-color: #4CAF50;
     color: white;
+  text-decoration: none;
 }
 
 #form div {
@@ -37,10 +39,16 @@ and open the template in the editor.
 #form div label{
     width:150px;
     float:left;
+	font-family:tahoma;
+	padding:4px;
+	margin:4px;
 }
 #form div input{
     width:150px;
     float:left;
+	padding:4px;
+	margin:4px;
+	font-size:16px;
 }
 #form div textarea {
     width:100%;
@@ -60,4 +68,31 @@ and open the template in the editor.
 
 #chartdiv {
     float:left;
+}
+
+.btn, .btn a {
+  background: #39454d;
+  background-image: -webkit-linear-gradient(top, #39454d, #2980b9);
+  background-image: -moz-linear-gradient(top, #39454d, #2980b9);
+  background-image: -ms-linear-gradient(top, #39454d, #2980b9);
+  background-image: -o-linear-gradient(top, #39454d, #2980b9);
+  background-image: linear-gradient(to bottom, #39454d, #2980b9);
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 6px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 6px 12px 6px 12px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #404e57;
+  background-image: -webkit-linear-gradient(top, #404e57, #3a87ba);
+  background-image: -moz-linear-gradient(top, #404e57, #3a87ba);
+  background-image: -ms-linear-gradient(top, #404e57, #3a87ba);
+  background-image: -o-linear-gradient(top, #404e57, #3a87ba);
+  background-image: linear-gradient(to bottom, #404e57, #3a87ba);
+  text-decoration: none;
 }
