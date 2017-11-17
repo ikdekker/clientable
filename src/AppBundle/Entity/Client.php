@@ -24,6 +24,27 @@ class Client {
     /**
      * @var float
      *
+     * @ORM\Column(name="targetWeight", type="float", nullable=true)
+     */
+    private $targetWeight; 
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="height", type="float", nullable=true)
+     */
+    private $height; 
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="birthday", type="datetime", nullable=true)
+     */
+    private $birthday;
+    
+   /**
+     * @var float
+     *
      * @ORM\Column(name="initialWeight", type="float", nullable=true)
      */
     private $initialWeight;
@@ -70,6 +91,65 @@ class Client {
      */
     private $notes;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="diet", type="text", length=2000, nullable=true)
+     */
+    private $diet; // bijzonderheden
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="agreements", type="text", length=2000, nullable=true)
+     */
+    private $agreements; // afspraken 
+    
+    public function getTargetWeight() {
+        return $this->targetWeight;
+    }
+
+    public function getHeight() {
+        return $this->height;
+    }
+
+    public function getBirthday() {
+        return $this->birthday;
+    }
+
+    public function getDiet() {
+        return $this->diet;
+    }
+
+    public function getAgreements() {
+        return $this->agreements;
+    }
+
+    public function setTargetWeight($targetWeight) {
+        $this->targetWeight = $targetWeight;
+        return $this;
+    }
+
+    public function setHeight($height) {
+        $this->height = $height;
+        return $this;
+    }
+
+    public function setBirthday($birthday) {
+        $this->birthday = $birthday;
+        return $this;
+    }
+
+    public function setDiet($diet) {
+        $this->diet = $diet;
+        return $this;
+    }
+
+    public function setAgreements($agreements) {
+        $this->agreements = $agreements;
+        return $this;
+    }
+    
     public function getNotes() {
         return $this->notes;
     }

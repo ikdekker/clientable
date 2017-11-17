@@ -34,6 +34,41 @@ class Measurement
      * @ORM\Column(name="weight", type="float")
      */
     private $weight;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="bmi", type="float")
+     */
+    private $bmi;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="fatPercentage", type="float")
+     */
+    private $fatPercentage;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="muscleMass", type="float")
+     */
+    private $muscleMass;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="visceralFat", type="float")
+     */
+    private $visceralFat;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="kcal", type="float")
+     */
+    private $kcal;
 
     /**
      * @var \DateTime
@@ -42,10 +77,58 @@ class Measurement
      */
     private $date;
 
+    
+    
     public function __construct() {
         $this->date = new \DateTime(); 
     }
      
+    public function getBmi() {
+        return $this->bmi;
+    }
+
+    public function getFatPercentage() {
+        return $this->fatPercentage;
+    }
+
+    public function getMuscleMass() {
+        return $this->muscleMass;
+    }
+
+    public function getVisceralFat() {
+        return $this->visceralFat;
+    }
+
+    public function getKcal() {
+        return $this->kcal;
+    }
+
+    public function setBmi($bmi) {
+        $this->bmi = $bmi;
+        return $this;
+    }
+
+    public function setFatPercentage($fatPercentage) {
+        $this->fatPercentage = $fatPercentage;
+        return $this;
+    }
+
+    public function setMuscleMass($muscleMass) {
+        $this->muscleMass = $muscleMass;
+        return $this;
+    }
+
+    public function setVisceralFat($visceralFat) {
+        $this->visceralFat = $visceralFat;
+        return $this;
+    }
+
+    public function setKcal($kcal) {
+        $this->kcal = $kcal;
+        return $this;
+    }
+
+        
     /**
      * Get id
      *

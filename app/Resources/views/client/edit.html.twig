@@ -1,18 +1,22 @@
 <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 <!-- Styles -->
 <style>
-#chartdiv {
-	width	: 55%;
-	height	: 500px;
-	float:right;
-}
+    #chartdiv {
+        width	: 55%;
+        height	: 500px;
+        float:right;
+    }
 
-.edit-content {
-	width	: 40%;
+    .edit-content {
+        width	: 40%;
 
-float:left;
-}
-										
+        float:left;
+    }
+    
+    .measure label {
+        width: 140px;
+    display:inline-block
+    }
 </style>
 
 <!-- Resources -->
@@ -22,114 +26,119 @@ float:left;
 <link rel="stylesheet" type="text/css" media="all" href="{{ asset('js/amcharts/plugins/export/export.css') }}" />
 <script src="{{ asset('js/amcharts/themes/dark.js') }}"></script>
 <div class='edit-content'>
-{{ form(form) }}
-<br>
-<br>
-<br>
-<br>
-<div class="measure">
-    <h3>Metingen</h3>
-    <h4>nieuwe meting:</h4>
-<form action="/client/web/measurement/new" method="post">
-    <input type="hidden" name="client" value="{{ client }}">
-	<input type="date" id="measure_date" name="measure_date" required="required"/>
-    <input type="text" name="weight">
-    <input type="submit" value="Voeg toe">
-</form>
+    {{ form(form) }}
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="measure">
+        <h3>Metingen</h3>
+        <h4>nieuwe meting:</h4>
+        <form autocomplete="off" action="/client/web/measurement/new" method="post">
+            <input type="hidden" name="client" value="{{ client }}">
+            <label>datum</label><input type="date" id="measure_date" name="measure_date" required="required"/><br>
+            <label>Gewicht</label><input type="text" name="weight"><br>
+            <label>BMI</label><input type="text" name="bmi"><br>
+            <label>Vet</label><input type="text" name="fat"><br>
+            <label>Sp. mas.</label><input type="text" name="muscle_mass"><br>
+            <label>Vis.</label><input type="text" name="vis"><br>
+            <label>Kcal</label><input type="text" name="kcal"><br>
+            <label></label><input type="submit" value="Voeg toe">
+        </form>
 
-<form action="/client/web/client/delete/{{ client }}" method="post" onsubmit="return confirm('Are you sure you want to submit?');">
-<input type="submit" value="Verwijder klant"></input>
-</form>
-<button><a href="/client/web">Terug</a></button>
-</div>
+        <form action="/client/web/client/delete/{{ client }}" method="post" onsubmit="return confirm('Are you sure you want to submit?');">
+            <input type="submit" value="Verwijder klant"></input>
+        </form>
+        <button><a href="/client/web">Terug</a></button>
+    </div>
 </div>
 
 <script>
-var chart = AmCharts.makeChart("chartdiv", {
-    "type": "serial",
-    "theme": "light",
-    "marginRight": 40,
-    "marginLeft": 40,
-    "autoMarginOffset": 20,
-    "mouseWheelZoomEnabled":true,
-    "dataDateFormat": "YYYY-MM-DD",
-    "valueAxes": [{
-        "id": "v1",
-        "axisAlpha": 0,
-        "position": "left",
-        "ignoreAxisWidth":true
-    }],
-    "balloon": {
-        "borderThickness": 1,
-        "shadowAlpha": 0
-    },
-    "graphs": [{
-        "id": "g1",
-        "balloon":{
-          "drop":true,
-          "adjustBorderColor":false,
-          "color":"#ffffff"
+    var chart = AmCharts.makeChart("chartdiv", {
+        "type": "serial",
+        "theme": "light",
+        "marginRight": 40,
+        "marginLeft": 40,
+        "autoMarginOffset": 20,
+        "mouseWheelZoomEnabled": true,
+        "dataDateFormat": "YYYY-MM-DD",
+        "valueAxes": [{
+                "id": "v1",
+                "axisAlpha": 0,
+                "position": "left",
+                "ignoreAxisWidth": true
+            }],
+        "balloon": {
+            "borderThickness": 1,
+            "shadowAlpha": 0
         },
-        "bullet": "round",
-        "bulletBorderAlpha": 1,
-        "bulletColor": "#FFFFFF",
-        "bulletSize": 5,
-        "hideBulletsCount": 50,
-        "lineThickness": 2,
-        "title": "red line",
-        "useLineColorForBulletBorder": true,
-        "valueField": "value",
-        "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
-    }],
-    "chartScrollbar": {
-        "graph": "g1",
-        "oppositeAxis":false,
-        "offset":30,
-        "scrollbarHeight": 80,
-        "backgroundAlpha": 0,
-        "selectedBackgroundAlpha": 0.1,
-        "selectedBackgroundColor": "#888888",
-        "graphFillAlpha": 0,
-        "graphLineAlpha": 0.5,
-        "selectedGraphFillAlpha": 0,
-        "selectedGraphLineAlpha": 1,
-        "autoGridCount":true,
-        "color":"#AAAAAA"
-    },
-    "chartCursor": {
-        "pan": true,
-        "valueLineEnabled": true,
-        "valueLineBalloonEnabled": true,
-        "cursorAlpha":1,
-        "cursorColor":"#258cbb",
-        "limitToGraph":"g1",
-        "valueLineAlpha":0.2,
-        "valueZoomable":true
-    },
-    "valueScrollbar":{
-      "oppositeAxis":false,
-      "offset":50,
-      "scrollbarHeight":10
-    },
-    "categoryField": "date",
-    "categoryAxis": {
-        "parseDates": true,
-        "dashLength": 1,
-        "minorGridEnabled": true
-    },
-    "export": {
-        "enabled": true
-    },
-    "dataProvider": {{ measurements|raw }}
-});
+        "graphs": [{
+                "id": "g1",
+                "balloon": {
+                    "drop": true,
+                    "adjustBorderColor": false,
+                    "color": "#ffffff"
+                },
+                "bullet": "round",
+                "bulletBorderAlpha": 1,
+                "bulletColor": "#FFFFFF",
+                "bulletSize": 5,
+                "hideBulletsCount": 50,
+                "lineThickness": 2,
+                "title": "red line",
+                "useLineColorForBulletBorder": true,
+                "valueField": "value",
+                "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
+            }],
+        "chartScrollbar": {
+            "graph": "g1",
+            "oppositeAxis": false,
+            "offset": 30,
+            "scrollbarHeight": 80,
+            "backgroundAlpha": 0,
+            "selectedBackgroundAlpha": 0.1,
+            "selectedBackgroundColor": "#888888",
+            "graphFillAlpha": 0,
+            "graphLineAlpha": 0.5,
+            "selectedGraphFillAlpha": 0,
+            "selectedGraphLineAlpha": 1,
+            "autoGridCount": true,
+            "color": "#AAAAAA"
+        },
+        "chartCursor": {
+            "pan": true,
+            "valueLineEnabled": true,
+            "valueLineBalloonEnabled": true,
+            "cursorAlpha": 1,
+            "cursorColor": "#258cbb",
+            "limitToGraph": "g1",
+            "valueLineAlpha": 0.2,
+            "valueZoomable": true
+        },
+        "valueScrollbar": {
+            "oppositeAxis": false,
+            "offset": 50,
+            "scrollbarHeight": 10
+        },
+        "categoryField": "date",
+        "categoryAxis": {
+            "parseDates": true,
+            "dashLength": 1,
+            "minorGridEnabled": true
+        },
+        "export": {
+            "enabled": true
+        },
+        "dataProvider":{{ measurements|raw }}
+    });
 
-chart.addListener("rendered", zoomChart);
+    chart.addListener("rendered", zoomChart);
 
-zoomChart();
+    zoomChart();
 
-function zoomChart() {
-    chart.zoomToIndexes(chart.dataProvider.length - 40, chart.dataProvider.length - 1);
-}
+    function zoomChart() {
+        chart.zoomToIndexes(chart.dataProvider.length - 40, chart.dataProvider.length - 1);
+    }
 </script>
 
 <!-- HTML -->

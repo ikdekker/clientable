@@ -51,11 +51,13 @@ class DefaultController extends Controller {
         $client = new Client();
 
         $form = $this->createFormBuilder($client)
-                ->add('firstName', TextType::class)
-                ->add('middleName', TextType::class, ["required" => false])
-                ->add('lastName', TextType::class)
-                ->add('initialWeight', TextType::class, ["required" => false])
-                ->add('initialDate', DateType::class, ["required" => false, 'widget' => 'single_text'])
+                ->add('firstName', TextType::class, ['label' => 'Voornaam'])
+                ->add('lastName', TextType::class, ['label' => 'Achternaam'])
+                ->add('initialWeight', TextType::class, ["required" => false, 'label' => 'Initieel gewicht'])
+                ->add('targetWeight', TextType::class, ["required" => false, 'label' => 'Streefgewicht'])
+                ->add('height', TextType::class, ["required" => false, 'label' => 'Lengte (cm)'])
+                ->add('initialDate', DateType::class, ["required" => false, 'widget' => 'single_text', 'label' => 'Startdatum'])
+                ->add('birthday', DateType::class, ["required" => false, 'widget' => 'single_text', 'label' => 'Geboortedatum'])
                 ->add('save', SubmitType::class, array('label' => 'creëren'))
                 ->getForm();
 
@@ -67,7 +69,6 @@ class DefaultController extends Controller {
             
             $client->setFirstName(ucfirst($formData['firstName']));
             $client->setLastName(ucfirst($formData['lastName']));
-            $client->setMiddleName($formData['middleName']);
             $client->setInitialWeight($weight);
             $client->setInitialDate($DT);
 
@@ -98,9 +99,22 @@ class DefaultController extends Controller {
             $DT = new DateTime($request->get('measure_date'));
             $clientId = $request->get('client');
             $weight = str_replace(",", ".", $request->get('weight'));
+            $bmi = str_replace(",", ".", $request->get('bmi'));
+            $fat = str_replace(",", ".", $request->get('fat'));
+            $muscleMass = str_replace(",", ".", $request->get('muscle_mass'));
+            $vis = str_replace(",", ".", $request->get('vis'));
+            $kcal = str_replace(",", ".", $request->get('kcal'));
+            
+            
             $measurement->setClient($clientId);
             $measurement->setWeight($weight);
-			$measurement->setDate($DT);
+            $measurement->setDate($DT);
+            $measurement->setBmi($bmi);
+            $measurement->setFatPercentage($fat);
+            $measurement->setMuscleMass($muscleMass);
+            $measurement->setVisceralFat($vis);
+            $measurement->setKcal($kcal);
+            
             $em->persist($measurement);
             $em->flush();
             return $this->redirectToRoute("edit_client", ['user' => $clientId]);
@@ -129,11 +143,15 @@ class DefaultController extends Controller {
         $client = $repo->find($user);
         $form = $this->createFormBuilder($client)
                 ->add('firstName', TextType::class)
-                ->add('middleName', TextType::class, ["required" => false])
                 ->add('lastName', TextType::class)
-                ->add('initialWeight', TextType::class, ["required" => false])
-                ->add('initialDate', DateType::class, ["required" => true, 'widget' => 'single_text'])
-                ->add('notes', TextareaType::class, ["required" => false])
+                ->add('initialWeight', TextType::class, ["required" => false, 'label' => 'Initieel gewicht'])
+                ->add('targetWeight', TextType::class, ["required" => false, 'label' => 'Streefgewicht'])
+                ->add('height', TextType::class, ["required" => false, 'label' => 'Lengte (cm)'])
+                ->add('initialDate', DateType::class, ["required" => false, 'widget' => 'single_text', 'label' => 'Startdatum'])
+                ->add('birthday', DateType::class, ["required" => false, 'widget' => 'single_text', 'label' => 'Geboortedatum'])
+                ->add('notes', TextareaType::class, ["required" => false, 'label' => "Notities"])
+                ->add('diet', TextareaType::class, ["required" => false, 'label' => "Bijzonderheden"])
+                ->add('agreements', TextareaType::class, ["required" => false, 'label' => "Afspraken"])
                 ->add('save', SubmitType::class, array('label' => 'Opslaan'))
                 ->getForm();
 
